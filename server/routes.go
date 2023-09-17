@@ -155,6 +155,7 @@ func load(ctx context.Context, model *Model, reqOpts map[string]interface{}, ses
 }
 
 func GenerateHandler(c *gin.Context) {
+	fmt.Println("GenerateHandler start")
 	loaded.mu.Lock()
 	defer loaded.mu.Unlock()
 
@@ -214,6 +215,8 @@ func GenerateHandler(c *gin.Context) {
 				r.TotalDuration = time.Since(checkpointStart)
 				r.LoadDuration = checkpointLoaded.Sub(checkpointStart)
 			}
+
+			fmt.Printf("resp: %+v\n", r)
 
 			ch <- r
 		}
